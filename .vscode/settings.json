@@ -1,0 +1,16 @@
+{
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "cSpell.words": [
+    "ahooks",
+    "antd",
+    "commitlint",
+    "immer",
+    "loadmore",
+    "mockjs"
+  ],
+  "docker.commands.runInteractive": "${containerCommand} run --rm -it ${exposedPorts} ${tag}"
+}
