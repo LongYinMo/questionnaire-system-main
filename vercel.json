@@ -13,11 +13,13 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/vercel.js"
-    },
+      "source": "/api/(.*)",
+      "destination": "https://questionnaire-mock-main-5ztxof8ul-nnpromaxs-projects.vercel.app/api/$1"
+    }
+  ],
+  "routes": [
     {
       "src": "/(.*)",
       "dest": "/index.html"
