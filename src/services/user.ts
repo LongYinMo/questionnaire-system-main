@@ -9,6 +9,9 @@ import { setToken } from '../utils/user-token'
 /**
  * 基础响应类型
  */
+/**
+ * 基础响应类型
+ */
 interface BaseResponse<T> {
   errno: number;
   data: T;
@@ -44,12 +47,15 @@ export async function getUserInfoService(): Promise<BaseResponse<UserInfoData>> 
  * @param {string} password - 密码
  * @returns {Promise<BaseResponse<AuthResponseData>>} - 包含token的响应数据
  */
-export async function loginService(username: string, password: string): Promise<BaseResponse<AuthResponseData>> {
-  const { data } = await axios.post<BaseResponse<AuthResponseData>>('/api/user/login', { username, password })
-  if (data.data?.token) {
-    setToken(data.data.token)
+export async function loginService(username: string, password: string): Promise<AuthResponseData> {
+  const response = await axios.post<BaseResponse<AuthResponseData>>('/api/user/login', { username, password });
+  console.log(response);
+  const apiData = response.data;
+  const userData = apiData.data || {};
+  if (userData.token) {
+    setToken(userData.token);
   }
-  return data
+  return userData || { username: '', nickname: '', token: '' }
 }
 
 /**
@@ -70,7 +76,7 @@ export async function registerService(
     password,
     nickname: nickname || undefined,
   })
-  if (data.data?.token) {
+  if (data?.data?.token) {
     setToken(data.data.token)
   }
   console.log(data);
