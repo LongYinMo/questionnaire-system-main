@@ -3,7 +3,7 @@
  * @Author      zono
  * @Description 请求单个列表的详情数据的hook
  * */
-import { useEffect } from 'react'
+import { useEffect, startTransition } from 'react'
 import { useRequest } from 'ahooks'
 import { useParams } from 'react-router-dom'
 import { getQuestionService } from '../services/question'
@@ -55,7 +55,9 @@ function useLoadQuestionData() {
 
   // 判断 id 变化，执行 ajax 加载问卷数据
   useEffect(() => {
-    run(id)
+    startTransition(() => {
+      run(id)
+    })
     // eslint-disable-next-line
   }, [id])
 
