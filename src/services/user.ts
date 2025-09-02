@@ -15,7 +15,6 @@ export async function getUserInfoService(): Promise<ResDataType> {
   return data
 }
 
-
 /**
  * @description 登录
  * @param {string} username - 用户名
@@ -29,7 +28,6 @@ export async function loginService(username: string, password: string): Promise<
   }
   return data
 }
-
 
 /**
  * @description 注册
@@ -47,7 +45,7 @@ export async function registerService(
   const data = await axios.post<ResDataType>('/api/user/register', {
     username,
     password,
-    nickname: nickname || undefined
+    nickname: nickname || undefined,
   })
   if (data.data?.token) {
     setToken(data.data.token)
