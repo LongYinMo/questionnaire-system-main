@@ -1,4 +1,8 @@
 module.exports = {
+  rules: {
+    'prettier/prettier': 'off'
+  },
+
   root: true,
   env: { browser: true, es2020: true },
   extends: [

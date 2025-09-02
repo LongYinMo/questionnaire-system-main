@@ -23,7 +23,7 @@ function useLoadUserData() {
   const { run } = useRequest(getUserInfoService, {
     manual: true, // 是否手动触发
     onSuccess(result) {
-      const { username, nickname } = result
+      const { username, nickname } = result.data
       dispatch(loginReducer({ username, nickname })) // 存储到 redux store
     },
     onFinally() {

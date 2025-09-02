@@ -70,6 +70,9 @@ export async function registerService(
     password,
     nickname: nickname || undefined,
   })
+  if (data.data?.token) {
+    setToken(data.data.token)
+  }
   console.log(data);
   return data
 }

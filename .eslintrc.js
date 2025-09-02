@@ -1,4 +1,8 @@
 module.exports = {
+  rules: {
+    'prettier/prettier': 'off'
+  },
+
   env: {
     browser: true,
     es2021: true,
@@ -7,7 +11,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
   ],
   overrides: [],
   parser: '@typescript-eslint/parser',
@@ -18,6 +21,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    'prettier/prettier': 'off'
   },
 }

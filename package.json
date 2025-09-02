@@ -48,6 +48,10 @@
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
+    "rules": {
+      "prettier/prettier": "off"
+    },
+
     "extends": [
       "react-app",
       "react-app/jest"
