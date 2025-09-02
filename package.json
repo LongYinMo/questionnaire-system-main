@@ -36,7 +36,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "concurrently \"craco start\" \"npm run start:mock\"",
+    "start:mock": "node api/index.js",
     "build": "craco build",
     "test": "craco test --watchAll=false",
     "eject": "react-scripts eject",
@@ -47,11 +48,11 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
+  "proxy": "http://localhost:4000",
   "eslintConfig": {
     "rules": {
       "prettier/prettier": "off"
     },
-
     "extends": [
       "react-app",
       "react-app/jest"
@@ -98,6 +99,7 @@
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "concurrently": "^9.2.1",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^5.5.4",

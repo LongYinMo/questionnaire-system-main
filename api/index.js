@@ -273,4 +273,44 @@ function getStatList(len = 10) {
 // 合并所有mock数据
 const mockList = [...userMock, ...questionMock, ...statMock]
 
-module.exports = mockList
+// 创建Express应用
+const express = require('express')
+const app = express()
+
+// 解析JSON请求体
+app.use(express.json())
+
+// 应用CORS中间件
+app.use(corsMiddleware)
+
+// 注册所有mock路由
+mockList.forEach(item => {
+  const { url, method, response } = item
+  app[method.toLowerCase()](url, (req, res) => {
+    try {
+      const result = response(req)
+      res.json(result)
+    } catch (error) {
+      res.status(500).json({
+        errno: 1,
+        message: 'Mock server error: ' + error.message
+      })
+    }
+  })
+})
+
+// 404处理
+app.use((req, res) => {
+  res.status(404).json({
+    errno: 1,
+    message: 'API not found'
+  })
+})
+
+// 启动服务器
+const PORT = process.env.PORT || 4000
+app.listen(PORT, () => {
+  console.log(`Mock server running on http://localhost:${PORT}`)
+})
+
+module.exports = app
