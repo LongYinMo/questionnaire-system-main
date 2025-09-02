@@ -49,13 +49,11 @@ export async function getUserInfoService(): Promise<BaseResponse<UserInfoData>> 
  */
 export async function loginService(username: string, password: string): Promise<AuthResponseData> {
   const response = await axios.post<BaseResponse<AuthResponseData>>('/api/user/login', { username, password });
-  console.log(response);
-  const apiData = response.data;
-  const userData = apiData.data || {};
-  if (userData.token) {
-    setToken(userData.token);
+  const result = response.data;
+  if (result?.data?.token) {
+    setToken(result.data.token);
   }
-  return userData || { username: '', nickname: '', token: '' }
+  return result.data || { username: '', nickname: '', token: '' }
 }
 
 /**

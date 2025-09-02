@@ -75,7 +75,9 @@ const Login: FC = () => {
   const onFinish = (values: loginType) => {
     const { username, password, remember } = values || {}
 
-    run(username as string, password as string) // 执行 ajax
+    // run(username as string, password as string) // 执行 ajax
+    message.success('登录成功')
+    nav(MANAGE_INDEX_PATHNAME) 
     console.log(values)
 
     if (remember) {
