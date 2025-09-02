@@ -3,15 +3,38 @@
  * @Author      zono
  * @Description 用户接口,登录注册等
  * */
-import axios, { ResDataType } from './ajax'
+import axios from './ajax'
 import { setToken } from '../utils/user-token'
 
 /**
- * @description 获取用户信息,用token获取，故不需要参数
- * @returns {Promise<ResDataType>} - 用户信息响应数据
+ * 基础响应类型
  */
-export async function getUserInfoService(): Promise<ResDataType> {
-  const data = (await axios.get('/api/user/info')) as ResDataType
+interface BaseResponse<T> {
+  errno: number;
+  data: T;
+}
+
+/**
+ * 用户信息数据类型
+ */
+interface UserInfoData {
+  username: string;
+  nickname: string;
+}
+
+/**
+ * 登录/注册响应数据类型
+ */
+interface AuthResponseData extends UserInfoData {
+  token: string;
+}
+
+/**
+ * @description 获取用户信息,用token获取，故不需要参数
+ * @returns {Promise<BaseResponse<UserInfoData>>} - 用户信息响应数据
+ */
+export async function getUserInfoService(): Promise<BaseResponse<UserInfoData>> {
+  const { data } = await axios.get<BaseResponse<UserInfoData>>('/api/user/info')
   return data
 }
 
@@ -19,12 +42,12 @@ export async function getUserInfoService(): Promise<ResDataType> {
  * @description 登录
  * @param {string} username - 用户名
  * @param {string} password - 密码
- * @returns {Promise<ResDataType>} - 包含token的响应数据
+ * @returns {Promise<BaseResponse<AuthResponseData>>} - 包含token的响应数据
  */
-export async function loginService(username: string, password: string): Promise<ResDataType> {
-  const data = (await axios.post('/api/user/login', { username, password })) as ResDataType
-  if (data.token) {
-    setToken(data.token)
+export async function loginService(username: string, password: string): Promise<BaseResponse<AuthResponseData>> {
+  const { data } = await axios.post<BaseResponse<AuthResponseData>>('/api/user/login', { username, password })
+  if (data.data?.token) {
+    setToken(data.data.token)
   }
   return data
 }
@@ -34,21 +57,19 @@ export async function loginService(username: string, password: string): Promise<
  * @param {string} username - 用户名
  * @param {string} password - 密码
  * @param {string} [nickname] - 昵称（可选）
- * @returns {Promise<ResDataType>} - 包含token的响应数据
+ * @returns {Promise<BaseResponse<AuthResponseData>>} - 包含token的响应数据
  */
 
 export async function registerService(
   username: string,
   password: string,
   nickname?: string
-): Promise<ResDataType> {
-  const data = await axios.post<ResDataType>('/api/user/register', {
+): Promise<BaseResponse<AuthResponseData>> {
+  const { data } = await axios.post<BaseResponse<AuthResponseData>>('/api/user/register', {
     username,
     password,
     nickname: nickname || undefined,
   })
-  if (data.data?.token) {
-    setToken(data.data.token)
-  }
+  console.log(data);
   return data
 }
