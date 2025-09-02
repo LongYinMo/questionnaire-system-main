@@ -8,9 +8,8 @@ import { setToken } from '../utils/user-token'
 
 /**
  * @description 获取用户信息,用token获取，故不需要参数
- * @param {type}
- * @returns
- * */
+ * @returns {Promise<ResDataType>} - 用户信息响应数据
+ */
 export async function getUserInfoService(): Promise<ResDataType> {
   const data = (await axios.get('/api/user/info')) as ResDataType
   return data
@@ -19,9 +18,10 @@ export async function getUserInfoService(): Promise<ResDataType> {
 
 /**
  * @description 登录
- * @param {type}
- * @returns
- * */
+ * @param {string} username - 用户名
+ * @param {string} password - 密码
+ * @returns {Promise<ResDataType>} - 包含token的响应数据
+ */
 export async function loginService(username: string, password: string): Promise<ResDataType> {
   const data = (await axios.post('/api/user/login', { username, password })) as ResDataType
   if (data.token) {
@@ -31,30 +31,26 @@ export async function loginService(username: string, password: string): Promise<
 }
 
 
-
-
-
-
-
-
 /**
  * @description 注册
- * @param {type}
- * @returns
- * */
+ * @param {string} username - 用户名
+ * @param {string} password - 密码
+ * @param {string} [nickname] - 昵称（可选）
+ * @returns {Promise<ResDataType>} - 包含token的响应数据
+ */
 
 export async function registerService(
   username: string,
   password: string,
   nickname?: string
 ): Promise<ResDataType> {
-  const data = (await axios.post('/api/user/register', {
+  const data = await axios.post<ResDataType>('/api/user/register', {
     username,
     password,
-    nickname: nickname || undefined,
-  })) as ResDataType
-  if (data.token) {
-    setToken(data.token)
+    nickname: nickname || undefined
+  })
+  if (data.data?.token) {
+    setToken(data.data.token)
   }
   return data
 }
