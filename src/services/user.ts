@@ -22,6 +22,24 @@ export async function getUserInfoService(): Promise<ResDataType> {
  * */
 export async function loginService(username: string, password: string): Promise<ResDataType> {
   const data = (await axios.post('/api/user/login', { username, password })) as ResDataType
+  if (data.token) {
+    setToken(data.token)
+  }
+  return data
+}
+
+/**
+ * @description 注册
+ * @param {type}
+ * @returns
+ * */
+export async function registerService(username: string, password: string): Promise<ResDataType> {
+  const data = (await axios.post('/api/user/register', { username, password })) as ResDataType
+  if (data.token) {
+    setToken(data.token)
+  }
+  return data
+}
   return data
 }
 
