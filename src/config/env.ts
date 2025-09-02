@@ -9,6 +9,7 @@ const getEnvConfig = (): EnvConfig => {
   const isProduction = process.env.NODE_ENV === 'production';
   
   if (isProduction) {
+    // 生产环境：使用固定的Mock API地址
     return {
       API_BASE_URL: 'https://questionnaire-mock-main-5ztxof8ul-nnpromaxs-projects.vercel.app',
       ENV: 'production'

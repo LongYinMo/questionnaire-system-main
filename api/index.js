@@ -4,17 +4,14 @@ const Random = Mock.Random;
 
 // CORS中间件函数
 function corsMiddleware(req, res, next) {
-  // 允许的域名列表
-  const allowedOrigins = [
-    'https://questionnaire-system-main.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:3001'
-  ];
-  
   const origin = req.headers.origin;
   
-  // 检查请求来源是否在允许列表中
-  if (allowedOrigins.includes(origin)) {
+  // 允许所有questionnaire-system-main相关的域名
+  if (origin && (
+    origin.includes('questionnaire-system-main') || 
+    origin.includes('localhost') ||
+    origin.includes('127.0.0.1')
+  )) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   
