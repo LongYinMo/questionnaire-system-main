@@ -1,62 +1,71 @@
-// Vercel API Route处理所有的API请求
+const express = require('express');
+const cors = require('cors');
 const mockList = require('./index');
 
-// 将URL模式转换为正则表达式，支持路径参数
-function pathToRegexp(path) {
-  return new RegExp(`^${path.replace(/:\w+/g, '[^/]+')}$`);
-}
+const app = express();
 
-// 查找匹配的mock路由
-function findMockRoute(method, url) {
-  return mockList.find(item => {
-    if (item.method.toLowerCase() !== method.toLowerCase()) {
-      return false;
+// 使用cors中间件
+app.use(cors({
+  origin: [
+    'https://questionnaire-system-main.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
+// 解析JSON请求体
+app.use(express.json());
+
+// 注册所有mock路由
+mockList.forEach(item => {
+  const { url, method, response } = item;
+  
+  app[method.toLowerCase()](url, (req, res) => {
+    try {
+      const data = response(req);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({
+        errno: -1,
+        msg: '服务器内部错误',
+        error: error.message
+      });
     }
-    
-    // 处理带参数的URL
-    const regex = pathToRegexp(item.url);
-    const match = url.match(regex);
-    
-    // 对于精确匹配或带参数的匹配
-    return match !== null;
+  });
+});
+
+// 健康检查端点
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// 404处理
+app.use('*', (req, res) => {
+  res.status(404).json({
+    errno: -1,
+    msg: '接口不存在'
+  });
+});
+
+// 错误处理中间件
+app.use((error, req, res, next) => {
+  console.error('API Error:', error);
+  res.status(500).json({
+    errno: -1,
+    msg: '服务器内部错误'
+  });
+});
+
+const PORT = process.env.PORT || 3001;
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Mock API server running on port ${PORT}`);
   });
 }
 
-// 主要的API处理函数
-export default function handler(req, res) {
-  const { method, url } = req;
-  
-  // 解析URL，去掉查询参数部分
-  const path = url.split('?')[0];
-  
-  // 查找匹配的mock路由
-  const mockItem = findMockRoute(method, path);
-  
-  if (mockItem) {
-    // 模拟网络延迟
-    setTimeout(() => {
-      try {
-        // 调用对应的response函数生成响应数据
-        const responseData = mockItem.response(req);
-        
-        // 设置响应头
-        res.setHeader('Content-Type', 'application/json');
-        
-        // 发送响应
-        res.status(200).json(responseData);
-      } catch (error) {
-        console.error('Error generating mock data:', error);
-        res.status(500).json({
-          errno: -1,
-          msg: '服务器内部错误'
-        });
-      }
-    }, 100); // 100ms延迟，模拟真实网络环境
-  } else {
-    // 未找到匹配的路由
-    res.status(404).json({
-      errno: -1,
-      msg: `未找到接口: ${path}`
-    });
-  }
-}
+// 导出app用于Vercel
+module.exports = app;

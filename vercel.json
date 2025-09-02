@@ -2,31 +2,48 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/api.js",
+      "src": "api/**/*.js",
       "use": "@vercel/node"
     },
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build",
-        "buildCommand": "npm run build"
+        "distDir": "build"
       }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/api.js",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+      "dest": "/api/vercel.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/build/$1",
-      "status": 200
+      "dest": "/index.html"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://questionnaire-system-main.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, X-Requested-With"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
+    }
+  ]
 }

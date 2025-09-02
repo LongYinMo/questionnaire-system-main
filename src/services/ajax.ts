@@ -6,8 +6,10 @@
 import axios from 'axios'
 import { message } from 'antd'
 import { getToken } from '../utils/user-token'
+import { envConfig } from '../config/env'
 
 const instance = axios.create({
+  baseURL: envConfig.API_BASE_URL,
   timeout: 10 * 1000,
 })
 

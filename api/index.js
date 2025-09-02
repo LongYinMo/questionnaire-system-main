@@ -2,6 +2,37 @@
 const Mock = require('mockjs');
 const Random = Mock.Random;
 
+// CORS中间件函数
+function corsMiddleware(req, res, next) {
+  // 允许的域名列表
+  const allowedOrigins = [
+    'https://questionnaire-system-main.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ];
+  
+  const origin = req.headers.origin;
+  
+  // 检查请求来源是否在允许列表中
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
+  // 设置其他CORS头部
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Max-Age', '86400'); // 24小时
+  
+  // 处理预检请求
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+  
+  if (next) next();
+}
+
 // 默认用户信息，用于登录测试
 const defaultUser = {
   username: 'admin',
