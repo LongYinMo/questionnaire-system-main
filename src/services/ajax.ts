@@ -5,7 +5,6 @@
  * */
 import axios from 'axios'
 import { message } from 'antd'
-import { getToken } from '../utils/user-token'
 import { envConfig } from '../config/env'
 
 const instance = axios.create({
