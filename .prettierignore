@@ -1,0 +1,9 @@
+src/stories/
+node_modules/
+build/
+.git/
+.idea/
+.vscode/
+*.log
+public/
+README.md

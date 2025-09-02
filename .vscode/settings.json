@@ -4,13 +4,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "cSpell.words": [
-    "ahooks",
-    "antd",
-    "commitlint",
-    "immer",
-    "loadmore",
-    "mockjs"
-  ],
+  "cSpell.words": ["ahooks", "antd", "commitlint", "immer", "loadmore", "mockjs"],
   "docker.commands.runInteractive": "${containerCommand} run --rm -it ${exposedPorts} ${tag}"
 }

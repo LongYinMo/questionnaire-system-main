@@ -1,4 +1,4 @@
-const app = require('./api');
+const app = require('./api')
 
 // Vercel函数入口点
-module.exports = app;
+module.exports = app

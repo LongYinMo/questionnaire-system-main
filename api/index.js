@@ -1,41 +1,42 @@
 // 简化版的mock数据服务，用于Vercel部署
-const Mock = require('mockjs');
-const Random = Mock.Random;
+const Mock = require('mockjs')
+const Random = Mock.Random
 
 // CORS中间件函数
 function corsMiddleware(req, res, next) {
-  const origin = req.headers.origin;
-  
+  const origin = req.headers.origin
+
   // 允许所有questionnaire-system-main相关的域名
-  if (origin && (
-    origin.includes('questionnaire-system-main') || 
-    origin.includes('localhost') ||
-    origin.includes('127.0.0.1')
-  )) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
+  if (
+    origin &&
+    (origin.includes('questionnaire-system-main') ||
+      origin.includes('localhost') ||
+      origin.includes('127.0.0.1'))
+  ) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
   }
-  
+
   // 设置其他CORS头部
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Max-Age', '86400'); // 24小时
-  
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader('Access-Control-Max-Age', '86400') // 24小时
+
   // 处理预检请求
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    res.status(200).end()
+    return
   }
-  
-  if (next) next();
+
+  if (next) next()
 }
 
 // 默认用户信息，用于登录测试
 const defaultUser = {
   username: 'admin',
   password: 'admin123',
-  nickname: '管理员'
-};
+  nickname: '管理员',
+}
 
 // 用户相关API
 const userMock = [
@@ -58,8 +59,8 @@ const userMock = [
   {
     url: '/api/user/login',
     method: 'post',
-    response: (req) => {
-      const { body } = req;
+    response: req => {
+      const { body } = req
       // 检查是否为默认用户名和密码
       if (body.username === defaultUser.username && body.password === defaultUser.password) {
         return {
@@ -67,7 +68,7 @@ const userMock = [
           data: {
             token: 'DEFAULT_USER_TOKEN',
           },
-        };
+        }
       }
       // 对于其他用户名和密码，随机生成token
       return {
@@ -75,10 +76,10 @@ const userMock = [
         data: {
           token: Random.word(20),
         },
-      };
+      }
     },
   },
-];
+]
 
 // 问卷相关API
 const questionMock = [
@@ -112,11 +113,11 @@ const questionMock = [
   {
     url: '/api/question',
     method: 'get',
-    response: (req) => {
-      const { query } = req;
-      const isDeleted = req.url.includes('isDeleted=true');
-      const isStar = req.url.includes('isStar=true');
-      const pageSize = parseInt(query.pageSize) || 10;
+    response: req => {
+      const { query } = req
+      const isDeleted = req.url.includes('isDeleted=true')
+      const isStar = req.url.includes('isStar=true')
+      const pageSize = parseInt(query.pageSize) || 10
 
       return {
         errno: 0,
@@ -124,7 +125,7 @@ const questionMock = [
           List: getQuestionList({ len: pageSize, isDeleted, isStar }),
           total: 100,
         },
-      };
+      }
     },
   },
   {
@@ -147,7 +148,7 @@ const questionMock = [
     method: 'delete',
     response: () => ({ errno: 0 }),
   },
-];
+]
 
 // 统计相关API
 const statMock = [
@@ -176,12 +177,12 @@ const statMock = [
       },
     }),
   },
-];
+]
 
 // Mock数据生成函数
 function getQuestionList(opt = {}) {
-  const { len = 10, isStar = false, isDeleted = false } = opt;
-  const list = [];
+  const { len = 10, isStar = false, isDeleted = false } = opt
+  const list = []
   for (let i = 0; i < len; i++) {
     list.push({
       _id: Random.id(),
@@ -191,9 +192,9 @@ function getQuestionList(opt = {}) {
       answerCount: Random.natural(50, 100),
       createdAt: Random.datetime(),
       isDeleted,
-    });
+    })
   }
-  return list;
+  return list
 }
 
 function getComponentList() {
@@ -230,44 +231,46 @@ function getComponentList() {
       isLocked: false,
       props: { title: '你的电话', placeholder: '请输入电话...' },
     },
-  ];
+  ]
 }
 
 function getStatList(len = 10) {
-  const componentList = getComponentList();
-  const res = [];
+  const componentList = getComponentList()
+  const res = []
 
   for (let i = 0; i < len; i++) {
-    const stat = { _id: Random.id() };
+    const stat = { _id: Random.id() }
 
-    componentList.forEach((c) => {
-      const { fe_id, type, props } = c;
+    componentList.forEach(c => {
+      const { fe_id, type, props } = c
 
       switch (type) {
         case 'questionInput':
-          stat[fe_id] = Random.ctitle();
-          break;
+          stat[fe_id] = Random.ctitle()
+          break
         case 'questionTextarea':
-          stat[fe_id] = Random.ctitle();
-          break;
+          stat[fe_id] = Random.ctitle()
+          break
         case 'questionRadio':
-          stat[fe_id] = props.options?.[0]?.text || '选项1';
-          break;
+          stat[fe_id] = props.options?.[0]?.text || '选项1'
+          break
         case 'questionCheckbox':
-          stat[fe_id] = props.list?.[0]?.text ? `${props.list[0].text},${props.list[1]?.text || ''}` : '选项1';
-          break;
+          stat[fe_id] = props.list?.[0]?.text
+            ? `${props.list[0].text},${props.list[1]?.text || ''}`
+            : '选项1'
+          break
         default:
-          stat[fe_id] = '';
+          stat[fe_id] = ''
       }
-    });
+    })
 
-    res.push(stat);
+    res.push(stat)
   }
 
-  return res;
+  return res
 }
 
 // 合并所有mock数据
-const mockList = [...userMock, ...questionMock, ...statMock];
+const mockList = [...userMock, ...questionMock, ...statMock]
 
-module.exports = mockList;
+module.exports = mockList

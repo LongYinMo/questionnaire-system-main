@@ -1,5 +1,0 @@
-* [32mmain[m
-  [31mremotes/origin/HEAD[m -> origin/main
-  [31mremotes/origin/main[m
-[33m721e500[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fix: 解决CORS跨域问题，添加Express服务器和CORS配置
-[33m6ef8e93[m Initial commit: Complete questionnaire system with mock API and Vercel config

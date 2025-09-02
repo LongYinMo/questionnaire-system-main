@@ -1,4 +1,10 @@
 module.exports = {
+  endOfLine: 'auto',
+  // 指定文件类型解析器
+  overrides: [
+    { files: '*.scss', options: { parser: 'scss' } },
+    { files: '*.json', options: { parser: 'json' } },
+  ],
   // 箭头函数只有一个参数的时候可以忽略括号
   arrowParens: 'avoid',
   // 括号内部不要出现空格
