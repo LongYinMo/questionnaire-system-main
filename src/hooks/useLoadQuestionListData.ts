@@ -3,8 +3,9 @@
  * @Author      zono
  * @Description 请求列表数据的hook
  * */
-import { useSearchParams } from 'react-router-dom'
-
+import { useSearchParams,} from 'react-router-dom';
+import { startTransition } from 'react'
+import {useEffect} from 'react'
 import { getQuestionListService } from '../services/question'
 import { useRequest } from 'ahooks'
 import {
@@ -36,9 +37,16 @@ function useLoadQuestionListData(options: Partial<OptionType> = {}) {
       return data
     },
     {
-      refreshDeps: [searchParams], // 当searchParams变化时重新请求
+      manual: true
     }
   )
+  // 当searchParams变化时使用startTransition触发请求
+  useEffect(() => {
+    startTransition(() => {
+      refresh();
+    });
+  }, [searchParams, refresh])
+
   return { data, loading, error, refresh }
 }
 

@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from 'react'
+import React, { FC, useState, ChangeEvent, startTransition } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Button, Space, Typography, Input, message } from 'antd'
@@ -100,7 +100,9 @@ const PublishButton: FC = () => {
       manual: true,
       onSuccess() {
         message.success('发布成功')
-        nav('/question/stat/' + id) // 发布成功，跳转到统计页面
+        startTransition(() => {
+          nav('/question/stat/' + id); // 发布成功，跳转到统计页面
+        });
       },
     }
   )

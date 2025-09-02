@@ -3,7 +3,7 @@
  * @Author      zono
  * @Description 问卷信息卡片组件
  * */
-import React, { FC, useState } from 'react'
+import React, { FC, useState, startTransition } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import styles from './QuestionCard.module.scss'
 import { Button, Space, Divider, Popconfirm, Modal, message } from 'antd'
@@ -56,7 +56,9 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
       manual: true,
       onSuccess(result) {
         message.success('复制成功')
-        nav(`/question/edit/${result._id}`)
+        startTransition(() => {
+          nav(`/question/edit/${result._id}`)
+        })
       },
     }
   )

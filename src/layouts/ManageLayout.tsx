@@ -7,7 +7,8 @@
 import React, { FC } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { Button, Space, Divider, message } from 'antd'
-import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
+import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons';
+import { startTransition } from 'react';
 import { createQuestionService } from '../services/question'
 import { useRequest } from 'ahooks'
 import styles from './ManageLayout.module.scss'
@@ -23,9 +24,11 @@ const ManageLayout: FC = () => {
   } = useRequest(createQuestionService, {
     manual: true, //初始化时是否自动执行
     onSuccess(result) {
-      nav(`/question/edit/${result.id}`)
-      message.success('创建成功')
-    },
+  startTransition(() => {
+    nav(`/question/edit/${result.id}`);
+  });
+  message.success('创建成功');
+},
   })
 
   return (
