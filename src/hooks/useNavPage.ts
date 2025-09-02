@@ -35,12 +35,13 @@ function useNavPage(waitingUserData: boolean) {
       return
     }
 
+    // 移除登录跳转逻辑 - 始终允许访问所有页面
     // 未登录 跳转到登录页面
-    if (isNoNeedUserInfo(pathname)) {
-      return
-    } else {
-      nav(LOGIN_PATHNAME)
-    }
+    // if (isNoNeedUserInfo(pathname)) {
+    //   return
+    // } else {
+    //   nav(LOGIN_PATHNAME)
+    // }
   }, [waitingUserData, username, pathname])
 }
 
