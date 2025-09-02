@@ -8,9 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import useGetUserInfo from './useGetUserInfo'
 import {
   isLoginOrRegister,
-  isNoNeedUserInfo,
   MANAGE_INDEX_PATHNAME,
-  LOGIN_PATHNAME,
 } from '../router/index'
 
 /**
