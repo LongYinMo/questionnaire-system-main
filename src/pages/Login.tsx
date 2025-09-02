@@ -54,22 +54,22 @@ const Login: FC = () => {
   }, [form])
 
   // 请求后端
-  const { run } = useRequest(
-    async (username: string, password: string) => {
-      return await loginService(username, password)
-    },
-    {
-      manual: true,
-      onSuccess(result?: any) {
-        // data会返回token，这里可以存储token
-        const { token = '' } = result
-        setToken(token) // 存储 token
+  // const { run } = useRequest(
+  //   async (username: string, password: string) => {
+  //     return await loginService(username, password)
+  //   },
+  //   {
+  //     manual: true,
+  //     onSuccess(result?: any) {
+  //       // data会返回token，这里可以存储token
+  //       const { token = '' } = result
+  //       setToken(token) // 存储 token
 
-        message.success('登录成功')
-        nav(MANAGE_INDEX_PATHNAME) // 导航到“我的问卷”
-      },
-    }
-  )
+  //       message.success('登录成功')
+  //       nav(MANAGE_INDEX_PATHNAME) // 导航到“我的问卷”
+  //     },
+  //   }
+  // )
 
   // 表单提交
   const onFinish = (values: loginType) => {
