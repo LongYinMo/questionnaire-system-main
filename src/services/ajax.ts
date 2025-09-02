@@ -18,7 +18,7 @@ const instance = axios.create({
  * */
 instance.interceptors.request.use(
   config => {
-    config.headers['Authorization'] = `Bearer ${getToken()}` // JWT 的固定格式
+    // 移除token认证: 不添加Authorization头
     return config
   },
   error => Promise.reject(error)
