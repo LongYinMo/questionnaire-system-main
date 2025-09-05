@@ -3,7 +3,7 @@
  * @Author      zono
  * @Description 右侧面板
  * */
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { Tabs } from 'antd'
 import { FileTextOutlined, SettingOutlined } from '@ant-design/icons'
 import ComponentProp from './ComponentProp'
@@ -17,8 +17,8 @@ enum TAB_KEYS {
 }
 
 const RightPanel: FC = () => {
-  const [activeKey, setActiveKey] = useState(TAB_KEYS.PROP_KEY)
-  const { selectedId } = useGetComponentInfo()
+  
+  
 
   
 
@@ -37,7 +37,7 @@ const RightPanel: FC = () => {
     },
   ]
 
-  return <Tabs activeKey={activeKey} items={tabsItems}></Tabs>
+  return <Tabs items={tabsItems}></Tabs>
 }
 
 export default RightPanel
