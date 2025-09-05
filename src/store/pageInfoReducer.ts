@@ -27,9 +27,8 @@ export const pageInfoReducer = createSlice({
   reducers: {
     // 设置页面信息
     resetPageInfo: (state: PageInfoType, action: PayloadAction<PageInfoType>) => {
-      state = action.payload
-      return state
-    },
+  return action.payload
+},
 
     // 修改标题
     changePageTitle: produce((draft: PageInfoType, action: PayloadAction<string>) => {
