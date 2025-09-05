@@ -3,7 +3,7 @@
  * @Author      zono
  * @Description 右侧面板
  * */
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Tabs } from 'antd'
 import { FileTextOutlined, SettingOutlined } from '@ant-design/icons'
 import ComponentProp from './ComponentProp'
