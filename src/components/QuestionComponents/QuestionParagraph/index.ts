@@ -1,8 +1,4 @@
-/**
- * @Date        2024/03/05 15:31:39
- * @Author      zono
- * @Description 段落组件
- * */
+
 
 import Component from './Component'
 import PropComponent from './PropComponent'

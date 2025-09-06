@@ -1,8 +1,4 @@
-/**
- * @Date        2024/03/04 21:50:20
- * @Author      zono
- * @Description 存储组件列表
- * */
+
 import { ComponentInfoType, ComponentsStateType } from './index'
 
 /**
