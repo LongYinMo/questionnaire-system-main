@@ -18,7 +18,7 @@ const Edit: FC = () => {
     dispatch(changeSelectedId(''))
   }
   // TODO修改标题
-  useTitle(`低代码问卷平台——问卷编辑`)
+  useTitle(`问卷平台——问卷编辑`)
 
   return (
     <div className={styles.container}>
