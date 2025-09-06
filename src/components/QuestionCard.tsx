@@ -1,8 +1,3 @@
-/**
- * @Date        2024/03/13 08:26:04
- * @Author      zono
- * @Description 问卷信息卡片组件
- * */
 import React, { FC, useState, startTransition } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import styles from './QuestionCard.module.scss'

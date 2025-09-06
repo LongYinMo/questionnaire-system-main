@@ -1,8 +1,3 @@
-/**
- * @Date        2024/03/17 16:59:16
- * @Author      zono
- * @Description 回收站问卷列表
- * */
 import React, { FC, useState } from 'react'
 import { useTitle } from 'ahooks'
 import { Typography, Table, Tag, Button, Space, Modal, Empty, Spin, message } from 'antd'
@@ -18,7 +13,7 @@ const { Title } = Typography
 const { confirm } = Modal
 
 const Trash: FC = () => {
-  useTitle('zono问卷 - 回收站')
+  useTitle('回收站')
 
   const { data = {}, loading, refresh } = useLoadQuestionListData({ isDeleted: true })
   const { List = [], total = 0 } = data
@@ -43,16 +38,6 @@ const Trash: FC = () => {
       },
     }
   )
-
-  // const recover = () => {
-  //   confirm({
-  //     title: '确认恢复该问卷？',
-  //     icon: <ExclamationCircleOutlined />,
-  //     content: '恢复后可以在我的问卷中查看',
-  //     onOk: recover,
-  //   })
-  // }
-
   // 删除
   const { run: deleteQuestion } = useRequest(
     async () => await deleteQuestionsService(selectedIds),

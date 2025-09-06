@@ -1,9 +1,3 @@
-/**
- * @Date        2024/02/18 19:15:48
- * @Author      zono
- * @Description 注册页
- * */
-
 import React, { FC } from 'react'
 import { Typography, Space, Form, Input, Button, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'

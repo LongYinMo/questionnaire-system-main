@@ -1,8 +1,3 @@
-/**
- * @Date        2024/02/25 19:30:09
- * @Author      zono
- * @Description 请求单个列表的详情数据的hook
- * */
 import { useEffect, startTransition } from 'react'
 import { useRequest } from 'ahooks'
 import { useParams } from 'react-router-dom'

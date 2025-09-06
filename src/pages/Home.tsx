@@ -1,8 +1,3 @@
-/**
- * @Date        2024/03/17 17:00:15
- * @Author      zono
- * @Description 主页
- * */
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Typography } from 'antd'
@@ -19,7 +14,7 @@ const Home: FC = () => {
       <div className={styles.info}>
         <Title className={styles.title}>问卷调查 | 在线投票</Title>
         <Paragraph className={styles['auto-typing']}>
-          已累计创建问卷 100 份，发布问卷 90 份，收到答卷 980 份
+          已累计创建问卷 100 份，发布问卷 90 份，收到答卷 98 份
         </Paragraph>
 
         <Button type="primary" onClick={() => nav(MANAGE_INDEX_PATHNAME)}>

@@ -1,8 +1,3 @@
-/**
- * @Date        2024/03/04 21:16:00
- * @Author      zono
- * @Description 左侧面板
- * */
 
 import React, { FC } from 'react'
 import { Tabs } from 'antd'

@@ -1,8 +1,3 @@
-/**
- * @Date        2024/02/18 11:14:26
- * @Author      zono
- * @Description 左上角Logo组件
- * */
 import React, { FC, useEffect, useState } from 'react'
 import { Space, Typography } from 'antd'
 import { FormOutlined } from '@ant-design/icons'

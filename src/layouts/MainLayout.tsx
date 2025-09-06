@@ -1,9 +1,3 @@
-/**
- * @Date        2024/02/17 14:45:04
- * @Author      zono
- * @Description 主布局
- * */
-
 import React, { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout, Spin } from 'antd'
@@ -40,7 +34,7 @@ const MainLayout: FC = () => {
         )}
       </Layout.Content>
       <Layout.Footer className={styles.footer}>
-        zono问卷项目&copy;2024.2 - present. Created by zono
+        低代码问卷项目&copy;2024.8 - present.
       </Layout.Footer>
     </Layout>
   )

@@ -1,9 +1,3 @@
-/**
- * @Date        2024/02/17 14:48:59
- * @Author      zono
- * @Description 问卷管理布局
- * 可以添加新问卷，切换管理页
- * */
 import React, { FC } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { Button, Space, Divider, message } from 'antd'
@@ -34,7 +28,7 @@ const ManageLayout: FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <p style={{ display: 'flex', justifyContent: 'center' }}>右边栏</p>
+        <p style={{ display: 'flex', justifyContent: 'center' }}>问卷管理</p>
         <Space direction="vertical">
           <Button
             type="primary"

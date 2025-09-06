@@ -1,8 +1,3 @@
-/**
- * @Date        2024/03/04 19:32:02
- * @Author      zono
- * @Description 从redux中获取组件信息的hook
- * */
 import { useSelector } from 'react-redux'
 import { StateType } from '../store'
 import { ComponentsStateType } from '../store/componentsReducer'

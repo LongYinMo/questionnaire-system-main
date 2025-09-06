@@ -1,8 +1,4 @@
-/**
- * @Date        2024/03/04 22:25:49
- * @Author      zono
- * @Description 右侧面板
- * */
+
 import React, { FC, useState } from 'react'
 import { Tabs } from 'antd'
 import { FileTextOutlined, SettingOutlined } from '@ant-design/icons'

@@ -1,8 +1,4 @@
-/**
- * @Date        2024/02/17 16:02:16
- * @Author      zono
- * @Description 编辑页
- * */
+
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { changeSelectedId } from '../../../store/componentsReducer'

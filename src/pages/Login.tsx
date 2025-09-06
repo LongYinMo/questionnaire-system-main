@@ -1,9 +1,3 @@
-/**
- * @Date        2024/02/17 15:53:58
- * @Author      zono
- * @Description 登录页
- * */
-
 import React, { FC, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Typography, Space, Form, Input, Button, Checkbox, message } from 'antd'
@@ -49,25 +43,6 @@ const Login: FC = () => {
     const { username, password } = getUserInfoFromStorage()
     form.setFieldsValue({ username, password })
   }, [form])
-
-  // 请求后端
-  // const { run } = useRequest(
-  //   async (username: string, password: string) => {
-  //     return await loginService(username, password)
-  //   },
-  //   {
-  //     manual: true,
-  //     onSuccess(result?: any) {
-  //       // data会返回token，这里可以存储token
-  //       const { token = '' } = result
-  //       setToken(token) // 存储 token
-
-  //       message.success('登录成功')
-  //       nav(MANAGE_INDEX_PATHNAME) // 导航到“我的问卷”
-  //     },
-  //   }
-  // )
-
   // 表单提交
   const onFinish = (values: loginType) => {
     const { username, password, remember } = values || {}

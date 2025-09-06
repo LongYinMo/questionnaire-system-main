@@ -1,8 +1,3 @@
-/**
- * @Date        2024/03/17 16:59:42
- * @Author      zono
- * @Description 我的问卷页
- * */
 import React, { FC, useEffect, useState, useRef, useMemo } from 'react'
 
 import QuestionCard from '../../components/QuestionCard'
@@ -17,7 +12,7 @@ import styles from './common.module.scss'
 const { Title } = Typography
 
 const List: FC = () => {
-  useTitle('zono-我的问卷')
+  useTitle('我的问卷')
 
   const [started, setStarted] = useState(false) // 是否已经开始加载（防抖，有延迟时间）
   const [page, setPage] = useState(1) // List 内部的数据，不在 url 参数中体现

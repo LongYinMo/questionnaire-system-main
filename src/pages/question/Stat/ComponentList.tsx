@@ -1,8 +1,4 @@
-/**
- * @Date        2024/03/05 23:35:30
- * @Author      zono
- * @Description 统计答卷展示
- * */
+
 import React, { FC } from 'react'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 import { getComponentConfByType } from '../../../components/QuestionComponents/index'

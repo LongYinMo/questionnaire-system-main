@@ -1,8 +1,4 @@
-/**
- * @Date        2024/02/19 17:43:15
- * @Author      zono
- * @Description 统计页
- * */
+
 import React, { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Spin, Result, Button } from 'antd'

@@ -1,8 +1,4 @@
-/**
- * @Date        2024/03/04 14:49:27
- * @Author      zono
- * @Description 画布页面
- * */
+
 import React, { FC } from 'react'
 import { Spin } from 'antd'
 import SortableContainer from '../../../components/DragSortable/SortableContainer'

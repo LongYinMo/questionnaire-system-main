@@ -1,8 +1,3 @@
-/**
- * @Date        2024/02/25 19:34:20
- * @Author      zono
- * @Description 请求列表数据的hook
- * */
 import { useSearchParams,} from 'react-router-dom';
 import { startTransition } from 'react'
 import {useEffect} from 'react'

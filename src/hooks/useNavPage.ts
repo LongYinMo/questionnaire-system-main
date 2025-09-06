@@ -1,8 +1,3 @@
-/**
- * @Date        2024/03/03 22:51:09
- * @Author      zono
- * @Description 判断是否登录，如果没有登录就跳转到登录页面
- * */
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useGetUserInfo from './useGetUserInfo'
@@ -32,14 +27,6 @@ function useNavPage(waitingUserData: boolean) {
       }
       return
     }
-
-    // 移除登录跳转逻辑 - 始终允许访问所有页面
-    // 未登录 跳转到登录页面
-    // if (isNoNeedUserInfo(pathname)) {
-    //   return
-    // } else {
-    //   nav(LOGIN_PATHNAME)
-    // }
   }, [waitingUserData, username, pathname])
 }
 

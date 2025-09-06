@@ -1,8 +1,4 @@
-/**
- * @Date        2024/03/04 22:41:51
- * @Author      zono
- * @Description 点击组件后，显示的组件属性面板
- * */
+
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
