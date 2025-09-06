@@ -1,5 +1,5 @@
 
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Tabs } from 'antd'
 import { FileTextOutlined, SettingOutlined } from '@ant-design/icons'
 import ComponentProp from './ComponentProp'
@@ -17,6 +17,13 @@ const RightPanel: FC = () => {
   const [activeKey, setActiveKey] = useState(
     selectedId ? TAB_KEYS.PROP_KEY : TAB_KEYS.SETTING_KEY
   )
+
+  // 监听selectedId变化自动切换标签页
+  useEffect(() => {
+    if (selectedId) {
+      setActiveKey(TAB_KEYS.PROP_KEY);
+    }
+  }, [selectedId])
 
   const tabsItems = [
     {
